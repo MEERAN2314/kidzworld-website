@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section id="programs-page" class="section-padded bg-light">
+        <div class="container">
+            <h2>Our Comprehensive Programs</h2>
+            <p>At International Kidz World Montessori Play School, we offer a range of programs designed to cater to the unique developmental needs of children at different age groups.</p>
+
+            <div class="program-grid">
+                <div class="program-card">
+                    <img src="{{ url_for('static', path='/images/toddler.jpg') }}" alt="Toddler program">
+                    <h4>Play Group (1.5 - 2.5 years)</h4>
+                    <p>A gentle introduction to school life, focusing on sensory exploration, motor skill development, and social interaction. Our play group environment is carefully prepared to encourage independence and a sense of wonder, allowing our youngest learners to explore safely and confidently.</p>
+                    <a href="#" class="button secondary-button">Enroll Now</a>
+                </div>
+                <div class="program-card">
+                    <img src="{{ url_for('static', path='/images/preschool.jpg') }}" alt="Preschool program">
+                    <h4>Pre.KG (2.5 - 3.5 years)</h4>
+                    <p>Engaging activities designed to build foundational skills in language, math, practical life, and cultural studies. Children in this program develop concentration, coordination, independence, and a love for learning through hands-on materials and guided discovery.</p>
+                    <a href="#" class="button secondary-button">Enroll Now</a>
+                </div>
+                <div class="program-card">
+                    <img src="{{ url_for('static', path='/images/kindergarten.jpg') }}" alt="Kindergarten program">
+                    <h4>L.K.G (3.5 - 4.5 years)</h4>
+                    <p>Advanced Montessori curriculum preparing children for elementary school with a strong academic and social foundation. This program fosters critical thinking, problem-solving, and leadership skills, ensuring a smooth transition to higher education.</p>
+                    <a href="#" class="button secondary-button">Enroll Now</a>
+                </div>
+                <div class="program-card">
+                    <img src="{{ url_for('static', path='/images/afterschool.jpg') }}" alt="After-school program">
+                    <h4>U.K.G (4.5 - 5.5 years)</h4>
+                    <p>Enrichment activities, homework support, and creative play for older children in a safe and engaging environment. Our U.K.G program provides a balanced blend of academic assistance and recreational activities, promoting continued growth and development.</p>
+                    <a href="#" class="button secondary-button">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

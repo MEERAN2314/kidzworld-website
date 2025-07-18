@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section id="about-page" class="section-padded">
+        <div class="container">
+            <h2>About Our School</h2>
+            <div class="about-content">
+                <img src="{{ url_for('static', path='/images/about-us.jpg') }}" alt="Children playing" class="about-image">
+                <p class="intro-text">International Kidz World Montessori Play School is dedicated to providing a nurturing and stimulating environment where children can explore, discover, and grow. Our Montessori-inspired curriculum focuses on hands-on learning, fostering independence, creativity, and a lifelong love for learning.</p>
+
+                <div class="feature-section">
+                    <div class="feature-item">
+                        <h3>Our Philosophy 💡</h3>
+                        <p>Our philosophy is rooted in the Montessori method, which emphasizes self-directed activity, hands-on learning, and collaborative play. In our classrooms, children make creative choices in their learning, while the classroom and the highly trained teacher offer age-appropriate activities to guide the process.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Our Approach 🌱</h3>
+                        <p>We believe every child is unique and deserves a personalized approach to education. Our experienced educators are passionate about guiding children through their developmental milestones, ensuring a holistic growth experience. Children work in groups and individually to discover and explore knowledge of the world and to develop their maximum potential.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Our Community ❤️</h3>
+                        <p>We are committed to creating a safe, inclusive, and joyful learning community where every child feels valued and empowered to reach their full potential. Join us in fostering a love for learning that lasts a lifetime!</p>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <h3>Ready to Explore Kidz World?</h3>
+                    <p>Discover more about our programs and how we can help your child thrive!</p>
+                    <a href="/programs" class="button primary-button">Explore Programs</a>
+                    <a href="/contact" class="button secondary-button">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

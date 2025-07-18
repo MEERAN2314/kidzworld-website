@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section id="gallery-page" class="section-padded">
+        <div class="container">
+            <h2>Our Happy Moments & Events</h2>
+            <p class="intro-text">Explore our collection of cherished memories and exciting events at International Kidz World Montessori Play School.</p>
+
+            {% for album in albums %}
+            <div class="album-section">
+                <h3>{{ album.event_name }} <span class="album-date">({{ album.date }})</span></h3>
+                <div class="gallery-grid">
+                    {% for image in album.images %}
+                    <div class="gallery-item">
+                        <img src="{{ url_for('static', path=image.src) }}" alt="{{ image.alt }}">
+                        <p class="image-caption">{{ image.alt }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="cta-section">
+                <h3>Want to See More Fun?</h3>
+                <p>Visit us to experience the joy and learning firsthand!</p>
+                <a href="/contact" class="button primary-button">Schedule a Visit</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

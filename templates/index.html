@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section id="home" class="hero">
+        <div class="container">
+            <h2>Welcome to a World of Fun and Learning!</h2>
+            <p>Nurturing young minds for a brighter future.</p>
+            <a href="/programs" class="button primary-button">Explore Our Programs</a>
+        </div>
+    </section>
+
+    {% if message %}
+    <div class="message-banner">
+        <p>{{ message }}</p>
+    </div>
+    {% endif %}
+
+
+    <section id="why-choose-us" class="section-padded">
+        <div class="container">
+            <h2>Why Choose Kidz World?</h2>
+            <div class="feature-section">
+                <div class="feature-item">
+                    <h3>Montessori Certified Educators 🎓</h3>
+                    <p>Our passionate teachers are trained in the authentic Montessori method, guiding children with respect and expertise.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Safe & Stimulating Environment 🏡</h3>
+                    <p>A thoughtfully prepared classroom designed to encourage exploration, independence, and joyful learning.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Holistic Development 🌱</h3>
+                    <p>We focus on cognitive, social, emotional, and physical growth, nurturing well-rounded individuals.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Engaging Curriculum 🎨</h3>
+                    <p>Hands-on activities, creative play, and personalized learning paths keep children excited about discovery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="section-padded bg-light">
+        <div class="container">
+            <h2>What Parents Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p>"Kidz World has been a blessing for our child. The personalized attention and nurturing environment have truly made a difference!"</p>
+                    <p class="author">- Happy Parent 1</p>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Our daughter absolutely loves coming to school. She's learning so much and always comes home with a smile."</p>
+                    <p class="author">- Happy Parent 2</p>
+                </div>
+                <div class="testimonial-card">
+                    <p>"The Montessori approach here is fantastic. We've seen incredible growth in our son's independence and curiosity."</p>
+                    <p class="author">- Happy Parent 3</p>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Our child has blossomed at Kidz World. The staff are incredibly caring and dedicated."</p>
+                    <p class="author">- Happy Parent 4</p>
+                </div>
+                <div class="testimonial-card">
+                    <p>"We are so impressed with the curriculum and the positive atmosphere. Highly recommend Kidz World!"</p>
+                    <p class="author">- Happy Parent 5</p>
+                </div>
+                <div class="testimonial-card">
+                    <p>"The communication from the school is excellent, and we always feel informed about our child's progress."</p>
+                    <p class="author">- Happy Parent 6</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="visit-us" class="section-padded">
+        <div class="container">
+            <div class="cta-section">
+                <h3>Ready to Join Our Family?</h3>
+                <p>We invite you to visit our school and see our vibrant learning environment for yourself!</p>
+                <a href="/contact" class="button primary-button">Schedule a Visit</a>
+                <a href="/programs" class="button secondary-button">View All Programs</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

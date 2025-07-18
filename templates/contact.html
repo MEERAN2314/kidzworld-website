@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section id="contact-page" class="section-padded bg-light">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>We'd love to hear from you! Whether you have questions about our programs, admissions, or just want to say hello, feel free to reach out.</p>
+
+            <div class="contact-info">
+                <p><strong>Address:</strong> International Kidz World Montessori Play School, [Your School Address Here]</p>
+                <p><strong>Phone:</strong> +91 98765 43210</p>
+                <p><strong>Email:</strong> info@kidzworldmontessori.com</p>
+                <p><strong>Working Hours:</strong> Monday - Friday, 9:00 AM - 4:00 PM</p>
+            </div>
+
+            <form action="/contact" method="post" class="contact-form">
+                <h3>Send Us a Message</h3>
+                <div class="form-group">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="button primary-button">Send Message</button>
+            </form>
+
+            <div class="map-container">
+                <h3>Find Us on the Map</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.6965108833456!2d80.20006927593882!3d12.99125281444542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52672b555d0293%3A0x4924aa688025b965!2sInternational%20Kidz%20world%20montessori!5e0!3m2!1sen!2sin!4v1752785738064!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+{% endblock %}
