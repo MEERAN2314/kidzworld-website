@@ -3,15 +3,36 @@ body {
     font-family: 'Open Sans', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #e0f7fa; /* Light Cyan - cheerful background */
+    background: linear-gradient(135deg, #e0f7fa 0%, #f3e5f5 50%, #fff3e0 100%);
     color: #333;
     line-height: 1.6;
-    /* Playful wavy gradient pattern */
-    background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%23FFEB3B'/%3E%3Cstop offset='50%25' stop-color='%23FFC107'/%3E%3Cstop offset='100%25' stop-color='%23FFEB3B'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%234CAF50'/%3E%3Cstop offset='50%25' stop-color='%238BC34A'/%3E%3Cstop offset='100%25' stop-color='%234CAF50'/%3E%3C/linearGradient%3E%3ClinearGradient id='c' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%239C27B0'/%3E%3Cstop offset='50%25' stop-color='%23E1BEE7'/%3E%3Cstop offset='100%25' stop-color='%239C27B0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='0' y='0' width='100' height='100' fill='%23e0f7fa'/%3E%3Cpath d='M0 20 Q25 0 50 20 T100 20 V0 H0 Z' fill='url(%23a)' opacity='0.3'/%3E%3Cpath d='M0 40 Q25 20 50 40 T100 40 V20 H0 Z' fill='url(%23b)' opacity='0.3'/%3E%3Cpath d='M0 60 Q25 40 50 60 T100 60 V40 H0 Z' fill='url(%23c)' opacity='0.3'/%3E%3Cpath d='M0 80 Q25 60 50 80 T100 80 V60 H0 Z' fill='url(%23a)' opacity='0.3'/%3E%3Cpath d='M0 100 Q25 80 50 100 T100 100 V80 H0 Z' fill='url(%23b)' opacity='0.3'/%3E%3C/svg%3E");
-    background-repeat: repeat-y; /* Repeat vertically to cover height */
-    background-size: 100% auto; /* Ensure it scales correctly */
     opacity: 1;
-    transition: opacity 0.5s ease-in-out; /* Smooth fade transition */
+    transition: opacity 0.5s ease-in-out;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Animated background particles */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(255, 193, 7, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(76, 175, 80, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(156, 39, 176, 0.1) 0%, transparent 50%);
+    animation: floatingBubbles 20s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes floatingBubbles {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-20px) rotate(120deg); }
+    66% { transform: translateY(10px) rotate(240deg); }
 }
 
 body.fade-out {
@@ -27,21 +48,47 @@ body.fade-out {
 
 h1, h2, h3, h4 {
     font-family: 'Chewy', cursive;
-    color: #FF6F61; /* Vibrant Pink-Orange */
+    color: #FF6F61;
     text-align: center;
     margin-bottom: 20px;
-    opacity: 0; /* Start hidden for animation */
-    transform: translateY(20px); /* Start slightly below */
-    animation: fadeInSlideUp 1s ease-out forwards; /* Apply animation */
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for pop */
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+    animation: fadeInSlideUp 1.2s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+    position: relative;
+}
+
+h1, h2, h3, h4::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #FF6F61, #FFC107);
+    border-radius: 2px;
+    animation: underlineGrow 1.5s ease-out 0.5s forwards;
 }
 
 @keyframes fadeInSlideUp {
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
+
+@keyframes underlineGrow {
+    to {
+        width: 60px;
+    }
+}
+
+/* Staggered animation delays for multiple headings */
+h1 { animation-delay: 0.1s; }
+h2 { animation-delay: 0.2s; }
+h3 { animation-delay: 0.3s; }
+h4 { animation-delay: 0.4s; }
 
 h1 {
     font-size: 3.5em; /* Larger for impact */

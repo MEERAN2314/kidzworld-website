@@ -41,42 +41,202 @@
             <p>&copy; 2025 {{ school_name }}. All rights reserved.</p>
         </div>
     </footer>
+    
+    <!-- Scroll to top button -->
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
+        <span>↑</span>
+    </button>
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Page transition effects
             const links = document.querySelectorAll('a[href^="/"], a[href^="#"]');
             links.forEach(link => {
                 link.addEventListener('click', (e) => {
                     const href = link.getAttribute('href');
-                    if (href.startsWith('/')) { // External page navigation
+                    if (href.startsWith('/')) {
                         e.preventDefault();
                         document.body.classList.add('fade-out');
                         setTimeout(() => {
                             window.location.href = href;
-                        }, 500); // Match CSS transition duration
-                    } else if (href.startsWith('#')) { // Anchor link on same page
+                        }, 300);
+                    } else if (href.startsWith('#')) {
                         e.preventDefault();
                         const targetId = href.substring(1);
                         const targetElement = document.getElementById(targetId);
                         if (targetElement) {
                             targetElement.scrollIntoView({
-                                behavior: 'smooth'
+                                behavior: 'smooth',
+                                block: 'start'
                             });
                         }
                     }
                 });
             });
 
-            // Ensure body is visible on page load (after potential fade-out from previous page)
+            // Ensure body is visible on page load
             document.body.classList.remove('fade-out');
-        });
 
-        // Mobile navigation toggle
-        const hamburger = document.querySelector('.hamburger-menu');
-        const navLinks = document.querySelector('.nav-links');
+            // Scroll-based header effects
+            const header = document.querySelector('header');
+            let lastScrollY = window.scrollY;
 
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('active');
+            window.addEventListener('scroll', () => {
+                const currentScrollY = window.scrollY;
+                
+                if (currentScrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                lastScrollY = currentScrollY;
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            const animatedElements = document.querySelectorAll('.feature-item, .testimonial-card, .program-card, .gallery-item');
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+
+            // Mobile navigation toggle
+            const hamburger = document.querySelector('.hamburger-menu');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    hamburger.classList.toggle('active');
+                });
+
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+                        navLinks.classList.remove('active');
+                        hamburger.classList.remove('active');
+                    }
+                });
+            }
+
+            // Add loading animation to buttons
+            const buttons = document.querySelectorAll('.button');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    if (!this.classList.contains('loading')) {
+                        this.classList.add('loading');
+                        setTimeout(() => {
+                            this.classList.remove('loading');
+                        }, 2000);
+                    }
+                });
+            });
+
+            // Parallax effect for hero section
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.pageYOffset;
+                    const rate = scrolled * -0.3;
+                    hero.style.transform = `translateY(${rate}px)`;
+                });
+            }
+
+            // Scroll to top button
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            if (scrollToTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.pageYOffset > 300) {
+                        scrollToTopBtn.classList.add('visible');
+                    } else {
+                        scrollToTopBtn.classList.remove('visible');
+                    }
+                });
+
+                scrollToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Add ripple effect to buttons
+            function createRipple(event) {
+                const button = event.currentTarget;
+                const circle = document.createElement('span');
+                const diameter = Math.max(button.clientWidth, button.clientHeight);
+                const radius = diameter / 2;
+
+                circle.style.width = circle.style.height = `${diameter}px`;
+                circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+                circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+                circle.classList.add('ripple');
+
+                const ripple = button.getElementsByClassName('ripple')[0];
+                if (ripple) {
+                    ripple.remove();
+                }
+
+                button.appendChild(circle);
+            }
+
+            const rippleButtons = document.querySelectorAll('.button');
+            rippleButtons.forEach(button => {
+                button.addEventListener('click', createRipple);
+            });
+
+            // Simple image lightbox for gallery
+            const galleryImages = document.querySelectorAll('.gallery-item img');
+            galleryImages.forEach(img => {
+                img.addEventListener('click', () => {
+                    const lightbox = document.createElement('div');
+                    lightbox.className = 'lightbox';
+                    lightbox.innerHTML = `
+                        <div class="lightbox-content">
+                            <img src="${img.src}" alt="${img.alt}">
+                            <button class="lightbox-close">&times;</button>
+                        </div>
+                    `;
+                    
+                    document.body.appendChild(lightbox);
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Close lightbox
+                    const closeBtn = lightbox.querySelector('.lightbox-close');
+                    const closeLightbox = () => {
+                        document.body.removeChild(lightbox);
+                        document.body.style.overflow = 'auto';
+                    };
+                    
+                    closeBtn.addEventListener('click', closeLightbox);
+                    lightbox.addEventListener('click', (e) => {
+                        if (e.target === lightbox) closeLightbox();
+                    });
+                    
+                    // Close with Escape key
+                    document.addEventListener('keydown', function escapeHandler(e) {
+                        if (e.key === 'Escape') {
+                            closeLightbox();
+                            document.removeEventListener('keydown', escapeHandler);
+                        }
+                    });
+                });
+            });
         });
     </script>
 </body>
